@@ -1,0 +1,33 @@
+package com.example.todolist.ui.components
+
+import androidx.compose.material3.AlertDialogDefaults.titleContentColor
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import com.example.todolist.ui.theme.MainColor
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopBar(
+    color: Color = MainColor,
+    titleText: String
+) {
+    TopAppBar(
+        title = {
+            Text(
+                text = titleText,
+                fontWeight = FontWeight.W500,
+                fontSize = 44.sp
+            )
+        },
+        colors = TopAppBarColors(
+            containerColor = color,
+            titleContentColor = Color.White
+        )
+    )
+}
