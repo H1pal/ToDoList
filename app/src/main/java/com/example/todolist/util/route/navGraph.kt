@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.todolist.feature.home.HomeScreen
+import com.example.todolist.feature.home.ThemeSelectScreen
 import com.example.todolist.feature.splash.SplashScreen
 
 @Composable
@@ -22,6 +23,10 @@ fun NavigationGraph(
 
         composable<Home> {
             HomeScreen(navController = navController)
+        }
+
+        composable<Choice> {
+            ThemeSelectScreen(navController = navController)
         }
     }
 }
