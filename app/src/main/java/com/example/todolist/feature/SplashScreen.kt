@@ -1,4 +1,4 @@
-package com.example.todolist.feature.splash
+package com.example.todolist.feature
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,27 +20,28 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.todolist.R
-import com.example.todolist.ui.components.SplashDescription
+import com.example.todolist.ui.components.text.BasicText
 import com.example.todolist.ui.theme.MainColor
 import com.example.todolist.ui.theme.ToDoListTheme
-import com.example.todolist.util.route.Home
+import com.example.todolist.util.route.Choice
 import com.example.todolist.util.route.Splash
 import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun SplashScreen(
-    navController: NavController // = rememberNavController()
+    navController: NavController
+    // = rememberNavController()
 ) {
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(MainColor)
     ) { innerPadding ->
 
         LaunchedEffect(Unit) {
-            delay(1000)
+            delay(1000.milliseconds)
 
-            navController.navigate(Home) {
+            navController.navigate(Choice) {
                 popUpTo(Splash) { inclusive = true }
             }
         }
@@ -48,6 +49,7 @@ fun SplashScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .background(color = MainColor)
                 .padding(innerPadding),
             contentAlignment = Alignment.Center
         ) {
@@ -62,7 +64,7 @@ fun SplashScreen(
                     contentDescription = "ToDoList"
                 )
 
-                SplashDescription()
+                BasicText()
 
                 Spacer(modifier = Modifier.height(92.dp))
             }
@@ -71,10 +73,12 @@ fun SplashScreen(
     }
 }
 
-//@Preview
-//@Composable
-//private fun SplashScreenPreview() {
-//    ToDoListTheme {
-//        SplashScreen()
-//    }
-//}
+@Preview
+@Composable
+private fun SplashScreenPreview() {
+    ToDoListTheme {
+        SplashScreen(
+            navController = rememberNavController()
+        )
+    }
+}
