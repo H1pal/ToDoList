@@ -1,4 +1,4 @@
-package com.example.todolist.feature.splash
+package com.example.todolist.feature
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,11 +15,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.todolist.R
-import com.example.todolist.ui.components.SplashText
+import com.example.todolist.ui.components.text.BasicText
 import com.example.todolist.ui.theme.MainColor
+import com.example.todolist.ui.theme.ToDoListTheme
 import com.example.todolist.util.route.Choice
 import com.example.todolist.util.route.Splash
 import kotlinx.coroutines.delay
@@ -27,7 +30,8 @@ import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun SplashScreen(
-    navController: NavController // = rememberNavController()
+    navController: NavController
+    // = rememberNavController()
 ) {
     Scaffold(
         modifier = Modifier
@@ -60,7 +64,7 @@ fun SplashScreen(
                     contentDescription = "ToDoList"
                 )
 
-                SplashText()
+                BasicText()
 
                 Spacer(modifier = Modifier.height(92.dp))
             }
@@ -69,10 +73,12 @@ fun SplashScreen(
     }
 }
 
-//@Preview
-//@Composable
-//private fun SplashScreenPreview() {
-//    ToDoListTheme {
-//        SplashScreen()
-//    }
-//}
+@Preview
+@Composable
+private fun SplashScreenPreview() {
+    ToDoListTheme {
+        SplashScreen(
+            navController = rememberNavController()
+        )
+    }
+}

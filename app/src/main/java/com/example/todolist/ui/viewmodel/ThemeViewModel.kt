@@ -3,7 +3,7 @@ package com.example.todolist.ui.viewmodel
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.todolist.feature.data.repository.ThemeRepository
+import com.example.todolist.data.repository.ThemeRepository
 import com.example.todolist.ui.theme.FourthColor
 import com.example.todolist.ui.theme.MainColor
 import com.example.todolist.ui.theme.SecondColor
