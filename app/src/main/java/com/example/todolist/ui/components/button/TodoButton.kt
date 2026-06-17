@@ -1,5 +1,6 @@
-package com.example.todolist.ui.components
+package com.example.todolist.ui.components.button
 
+import android.R.attr.button
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -34,7 +35,6 @@ fun TodoButton(
     ) {
         Text(
             text = text,
-            modifier = Modifier,
             fontSize = 18.sp,
             fontWeight = FontWeight.W500
         )
