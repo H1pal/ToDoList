@@ -1,8 +1,8 @@
-package com.example.todolist.feature.data.repository
+package com.example.todolist.data.repository
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.edit
-import com.example.todolist.feature.data.local.THEME_KEY
+import com.example.todolist.data.local.THEME_KEY
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import androidx.datastore.preferences.core.Preferences
