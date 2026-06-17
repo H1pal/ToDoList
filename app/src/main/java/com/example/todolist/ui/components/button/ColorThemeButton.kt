@@ -1,6 +1,5 @@
 package com.example.todolist.ui.components.button
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -13,26 +12,32 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInRoot
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.todolist.R
 import com.example.todolist.ui.theme.LightGray
+import com.example.todolist.ui.theme.MainColor
 
 @Composable
 fun ColorThemeButton(
+    modifier: Modifier,
     color: Color,
     isSelected: Boolean = false,
-    onClicked: () -> Unit
+    onClicked: (Offset) -> Unit
 ) {
+    var position by remember { mutableStateOf(Offset.Zero) }
 
     Box(
         modifier = Modifier
@@ -40,10 +45,12 @@ fun ColorThemeButton(
             .shadow(8.dp,
                 shape = RoundedCornerShape(10.dp)
             )
+            .onGloballyPositioned { coord ->
+                position = coord.positionInRoot()
+            }
             .clickable {
-                onClicked()
+                onClicked(position)
             },
-
     ) {
         Box(
             modifier = Modifier
@@ -61,15 +68,17 @@ fun ColorThemeButton(
                     .background(color)
             )
 
-            if (isSelected) {
-                Icon(
-                    modifier = Modifier
-                        .size(32.dp)
-                        .align(alignment = Alignment.TopStart),
-                    painter = painterResource(id = R.drawable.badge),
-                    contentDescription = "Check Mark"
-                )
-            }
+//            if (isSelected) {
+//                Icon(
+//                    modifier = Modifier
+//                        .size(32.dp)
+//                        .align(alignment = Alignment.TopStart)
+//                        .offset(x = (-10).dp, y = (-10).dp),
+//                    imageVector = Icons.Filled.CheckCircle,
+//                    contentDescription = "Check Mark",
+//                    tint = Color.White
+//                )
+//            }
 
             Row(
                 modifier = Modifier
@@ -105,12 +114,14 @@ fun ColorThemeButton(
 
 }
 
-//@Preview(showBackground = false)
-//@Composable
-//fun ColorThemeButtonPreview() {
-//    ColorThemeButton(
-//        color = MainColor,
-//        onClicked = {}
-//    )
-//
-//}
+@Preview(showBackground = false)
+@Composable
+fun ColorThemeButtonPreview() {
+    ColorThemeButton(
+        color = MainColor,
+        onClicked = {},
+        isSelected = true,
+        modifier = Modifier
+    )
+
+}
