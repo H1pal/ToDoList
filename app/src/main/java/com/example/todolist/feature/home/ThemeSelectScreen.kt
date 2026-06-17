@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,11 +33,10 @@ import com.example.todolist.util.route.Home
 
 
 @Composable
-fun ThemeSelectScreen(
+fun ThemeScreen(
     navController: NavController,
     themeViewModel: ThemeViewModel = hiltViewModel()
 ) {
-
     val currentTheme by themeViewModel.theme.collectAsState()
 
     val choiceStart: () -> Unit = {
@@ -121,5 +121,5 @@ fun ThemeSelectScreen(
 @Preview(showBackground = false)
 @Composable
 private fun ThemeChoiceScreenPreview() {
-    ThemeSelectScreen(navController = rememberNavController())
+    ThemeScreen(navController = rememberNavController())
 }
