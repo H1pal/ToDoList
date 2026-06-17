@@ -111,7 +111,6 @@ fun ThemeContent(
                 ColorThemeButton(
                     modifier = Modifier,
                     color = MainColor,
-                    isSelected = (currentTheme == MainColor),
                     onClicked = { coord ->
                         onSelected("Aqua")
                         componentOffset = coord
@@ -121,7 +120,6 @@ fun ThemeContent(
                 ColorThemeButton(
                     modifier = Modifier,
                     color = SecondColor,
-                    isSelected = (currentTheme == SecondColor),
                     onClicked = { coord ->
                         onSelected("Black")
                         componentOffset = coord
@@ -131,7 +129,6 @@ fun ThemeContent(
                 ColorThemeButton(
                     modifier = Modifier,
                     color = ThirdColor,
-                    isSelected = (currentTheme == ThirdColor),
                     onClicked = { coord ->
                         onSelected("Red")
                         componentOffset = coord
@@ -141,7 +138,6 @@ fun ThemeContent(
                 ColorThemeButton(
                     modifier = Modifier,
                     color = FourthColor,
-                    isSelected = (currentTheme == FourthColor),
                     onClicked = { coord ->
                         onSelected("Blue")
                         componentOffset = coord
@@ -178,7 +174,6 @@ fun ThemeContent(
                     )
                 }
         )
-
 
 
     }

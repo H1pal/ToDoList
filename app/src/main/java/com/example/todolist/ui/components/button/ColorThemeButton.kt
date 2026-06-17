@@ -34,7 +34,6 @@ import com.example.todolist.ui.theme.MainColor
 fun ColorThemeButton(
     modifier: Modifier,
     color: Color,
-    isSelected: Boolean = false,
     onClicked: (Offset) -> Unit
 ) {
     var position by remember { mutableStateOf(Offset.Zero) }
@@ -67,18 +66,6 @@ fun ColorThemeButton(
                     .fillMaxHeight(0.33f)
                     .background(color)
             )
-
-//            if (isSelected) {
-//                Icon(
-//                    modifier = Modifier
-//                        .size(32.dp)
-//                        .align(alignment = Alignment.TopStart)
-//                        .offset(x = (-10).dp, y = (-10).dp),
-//                    imageVector = Icons.Filled.CheckCircle,
-//                    contentDescription = "Check Mark",
-//                    tint = Color.White
-//                )
-//            }
 
             Row(
                 modifier = Modifier
@@ -120,7 +107,6 @@ fun ColorThemeButtonPreview() {
     ColorThemeButton(
         color = MainColor,
         onClicked = {},
-        isSelected = true,
         modifier = Modifier
     )
 
