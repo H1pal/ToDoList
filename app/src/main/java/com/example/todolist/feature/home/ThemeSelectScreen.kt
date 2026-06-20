@@ -31,9 +31,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.todolist.ui.components.TopBar
+import com.example.todolist.ui.components.button.ActionButton
 import com.example.todolist.ui.components.button.ColorThemeButton
-import com.example.todolist.ui.components.button.TodoButton
-import com.example.todolist.ui.components.text.MenuTitle
+import com.example.todolist.ui.components.textfield.MenuTitleText
 import com.example.todolist.ui.theme.FourthColor
 import com.example.todolist.ui.theme.MainColor
 import com.example.todolist.ui.theme.SecondColor
@@ -79,7 +79,8 @@ fun ThemeContent(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopBar(
-                titleText = "Choose Theme"
+                titleText = "Choose Theme",
+                color = currentTheme
             )
         }
     ) { innerPadding ->
@@ -91,7 +92,7 @@ fun ThemeContent(
         ) {
 
 
-            MenuTitle(
+            MenuTitleText(
                 modifier = Modifier
                     .padding(top = 40.dp)
                     .align(alignment = Alignment.TopCenter),
@@ -145,7 +146,7 @@ fun ThemeContent(
                 )
             }
 
-            TodoButton(
+            ActionButton(
                 modifier = Modifier
                     .padding(bottom = 47.dp)
                     .align(alignment = Alignment.BottomCenter),
@@ -153,8 +154,11 @@ fun ThemeContent(
                 width = 327.dp,
                 onClicked = {
                     choiceStart()
-                }
+                },
+                backgroundColor = currentTheme
             )
+
+
         }
 
         Icon(

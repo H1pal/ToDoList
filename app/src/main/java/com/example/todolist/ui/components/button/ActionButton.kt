@@ -1,7 +1,7 @@
 package com.example.todolist.ui.components.button
 
-import android.R.attr.button
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -9,13 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.todolist.ui.theme.MainColor
 
 @Composable
-fun TodoButton(
+fun ActionButton(
     modifier: Modifier = Modifier,
     text: String,
     width: Dp,
@@ -31,7 +32,8 @@ fun TodoButton(
             containerColor = backgroundColor,
             contentColor = contentColor
         ),
-        onClick = onClicked
+        onClick = onClicked,
+        shape = RoundedCornerShape(25)
     ) {
         Text(
             text = text,
@@ -39,4 +41,14 @@ fun TodoButton(
             fontWeight = FontWeight.W500
         )
     }
+}
+
+@Preview
+@Composable
+fun PreviewTodoButton() {
+    ActionButton(
+        text = "H",
+        width = 100.dp,
+        onClicked = {}
+    )
 }

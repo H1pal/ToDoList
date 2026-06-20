@@ -1,2 +1,2 @@
-package com.example.todolist.ui.viewModel
+package com.example.todolist.ui.viewmodel
 

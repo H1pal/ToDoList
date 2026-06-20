@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.todolist.feature.SplashScreen
-import com.example.todolist.feature.home.HomeRoute
+import com.example.todolist.feature.home.HomeScreen
 import com.example.todolist.feature.home.ThemeScreen
 
 @Composable
@@ -22,7 +22,7 @@ fun NavigationGraph(
         }
 
         composable<Home> {
-            HomeRoute(navController = navController)
+            HomeScreen(navController = navController)
         }
 
         composable<Choice> {
