@@ -1,6 +1,8 @@
-package com.example.todolist.ui.components.Items
+package com.example.todolist.ui.components.items
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -9,7 +11,6 @@ import com.example.todolist.ui.components.ThemeBox
 
 @Composable
 fun TaskBox(
-    modifier: Modifier,
     color: Color,
     content: @Composable BoxScope.() -> Unit
 ) {
@@ -18,6 +19,10 @@ fun TaskBox(
         color = color,
         height = 148.dp
     ) {
-        content()
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            content()
+        }
     }
 }

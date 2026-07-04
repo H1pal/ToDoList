@@ -27,6 +27,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.todolist.ui.components.modal.CalendarModalSheet
 import com.example.todolist.ui.components.modal.TodoModalSheet
 import com.example.todolist.ui.theme.MainColor
 
@@ -40,18 +41,24 @@ fun TaskCreateScreen(
     modifier: Modifier,
     currentThemeColor: Color
 ) {
+    var savedTitle: String
+    var savedDescription: String
+
+
     var currentFocusedField by remember { mutableStateOf(FocusedField.NONE) }
 
     var title by remember { mutableStateOf(TextFieldValue("")) }
     var description by remember { mutableStateOf(TextFieldValue("")) }
 
-    var isOpen by remember { mutableStateOf(false) }
+    var isTodoOpen by remember { mutableStateOf(false) }
+    var isCalendarOpen by remember { mutableStateOf(false) }
+    var isTimerOpen by remember { mutableStateOf(false) }
 
     Row(
         modifier = Modifier
             .padding(bottom = 22.dp)
             .clickable {
-                isOpen = true
+                isTodoOpen = true
             }
     ) {
         Box(
@@ -86,7 +93,7 @@ fun TaskCreateScreen(
         )
     }
 
-    if (isOpen) {
+    if (isTodoOpen) {
         TodoModalSheet(
             modifier = Modifier,
             currentThemeColor = currentThemeColor,
@@ -94,7 +101,7 @@ fun TaskCreateScreen(
             description = description,
             currentFocusedField = currentFocusedField,
             onUpload = {
-                isOpen = false
+                isTodoOpen = false
                 title = TextFieldValue("")
                 description = TextFieldValue("")
             },
@@ -108,9 +115,22 @@ fun TaskCreateScreen(
                 currentFocusedField = focusedField
             },
             onDismissRequest = {
-                isOpen = false
+                isTodoOpen = false
             }
         )
+    }
+
+    if (isCalendarOpen) {
+        CalendarModalSheet(
+            onDismissRequest = {
+                isCalendarOpen = false
+            },
+            currentThemeColor = currentThemeColor
+        )
+    }
+
+    if (isTimerOpen) {
+
     }
 }
 

@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -59,7 +60,8 @@ fun TodoModalSheet(
         },
         sheetState = sheetState,
         containerColor = Color.White,
-        dragHandle = null
+        dragHandle = null,
+        shape = RectangleShape
     ) {
 
 
