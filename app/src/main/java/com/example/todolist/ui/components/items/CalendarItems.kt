@@ -44,7 +44,8 @@ import java.time.YearMonth
 @Composable
 fun CalendarItems(
     modifier: Modifier,
-    currentTime: LocalDateTime
+    currentTime: LocalDateTime,
+    currentThemeColor: Color
 ) {
     var currentMonth by remember { mutableStateOf(YearMonth.of(currentTime.year, currentTime.month)) }
     var selectedDate by remember { mutableStateOf(LocalDate.of(currentTime.year, currentTime.month, currentTime.dayOfMonth)) }
@@ -52,37 +53,63 @@ fun CalendarItems(
     val days = getCalendarDays(currentMonth)
 
     Column {
+
         Row(
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = { currentMonth = currentMonth.minusMonths(1) }) {
-                Icon(Icons.Default.KeyboardArrowLeft, contentDescription = null, tint = Color.DarkGray)
+            IconButton(onClick = { currentMonth = currentMonth.minusMonths(1) }
+            ) {
+                Icon(
+                    Icons.Default.KeyboardArrowLeft,
+                    contentDescription = null,
+                    tint = Color.DarkGray
+                )
             }
+
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = "${currentMonth.month} ${currentMonth.year}",
                     fontSize = 17.sp, fontWeight = FontWeight.Medium, color = Color.DarkGray
                 )
-                Icon(Icons.Default.ArrowDropDown, contentDescription = null, tint = Color.DarkGray)
+
+                Icon(
+                    Icons.Default.ArrowDropDown,
+                    contentDescription = null,
+                    tint = Color.DarkGray
+                )
             }
+
             IconButton(onClick = { currentMonth = currentMonth.plusMonths(1) }) {
-                Icon(Icons.Default.KeyboardArrowRight, contentDescription = null, tint = Color.DarkGray)
+                Icon(
+                    Icons.Default.KeyboardArrowRight,
+                    contentDescription = null,
+                    tint = Color.DarkGray
+                )
             }
         }
 
         val daysOfWeek = listOf("M", "T", "W", "T", "F", "S", "S")
-        Row(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+        ) {
             daysOfWeek.forEach { day ->
-                Text(day, modifier = Modifier.weight(1f), textAlign = TextAlign.Center, color = Color.DarkGray, fontSize = 14.sp)
+                Text(
+                    day,
+                    modifier = Modifier.weight(1f),
+                    textAlign = TextAlign.Center,
+                    color = Color.DarkGray,
+                    fontSize = 14.sp
+                )
             }
         }
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(7),
-            modifier = Modifier.height(260.dp),
-            userScrollEnabled = false
+            modifier = Modifier.height(340.dp),
+            userScrollEnabled = true
         ) {
             items(days) { date ->
                 val isSelected = (date == selectedDate)
@@ -90,10 +117,10 @@ fun CalendarItems(
 
                 Box(
                     modifier = Modifier
-                        .aspectRatio(1.2f)
+                        .aspectRatio(1f)
                         .padding(4.dp)
                         .clip(RoundedCornerShape(8.dp))
-                        .background(if (isSelected) MainColor else Color.Transparent)
+                        .background(if (isSelected) currentThemeColor else Color.Transparent)
                         .clickable { selectedDate = date },
                     contentAlignment = Alignment.Center
                 ) {
@@ -133,6 +160,7 @@ fun getCalendarDays(yearMonth: YearMonth): List<LocalDate> {
 fun PreviewCalendarItems() {
     CalendarItems(
         modifier = Modifier,
-        currentTime = LocalDateTime.now()
+        currentTime = LocalDateTime.now(),
+        currentThemeColor = MainColor
     )
 }

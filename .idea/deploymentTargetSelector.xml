@@ -6,10 +6,6 @@
         <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="MainActivity">
-        <option name="selectionMode" value="DROPDOWN" />
-        <DialogSelection />
-      </SelectionState>
       <SelectionState runConfigName="main">
         <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
@@ -22,7 +18,11 @@
         <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="PreviewCalendarModalSheet">
+      <SelectionState runConfigName="PreviewHomeScreen">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DialogSelection />
+      </SelectionState>
+      <SelectionState runConfigName="PreviewTimerDialog">
         <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
       </SelectionState>
@@ -30,11 +30,11 @@
         <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="PreviewTaskCreateScreen">
+      <SelectionState runConfigName="MainActivity">
         <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="PreviewHomeScreen">
+      <SelectionState runConfigName="PreviewCalendarModalSheet">
         <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
       </SelectionState>

@@ -42,6 +42,8 @@ import java.time.temporal.ChronoField
 fun CalendarModalSheet(
     modifier: Modifier = Modifier,
     onDismissRequest: () -> Unit,
+    onAddTime: () -> Unit,
+    onSchedule: () -> Unit,
     currentThemeColor: Color
 ) {
     val sheetState = rememberModalBottomSheetState()
@@ -141,22 +143,20 @@ fun CalendarModalSheet(
             ) {
                 CalendarItems(
                     modifier = Modifier,
-                    currentTime = currentTime
+                    currentTime = currentTime,
+                    currentThemeColor = currentThemeColor
                 )
             }
 
             Row(
                 modifier = Modifier
-                    .padding(top = 35.dp)
                     .align(alignment = Alignment.CenterHorizontally),
                 horizontalArrangement = Arrangement.spacedBy(15.dp)
             ) {
                 ModalActionButton(
                     modifier = Modifier,
                     contentColor = currentThemeColor,
-                    onClicked = {
-
-                    },
+                    onClicked = onAddTime,
                     text = "Add Time",
                     imageVector = Icons.Default.Add
                 )
@@ -164,10 +164,8 @@ fun CalendarModalSheet(
                 ModalActionButton(
                     modifier = Modifier,
                     imageVector = Icons.Default.Timer,
-                    text = "Schedule",
-                    onClicked = {
-
-                    },
+                    text = "Reschedule",
+                    onClicked = onSchedule,
                     backgroundColor = currentThemeColor
                 )
             }
@@ -187,6 +185,8 @@ data class DateOptions(
 fun PreviewCalendarModalSheet() {
     CalendarModalSheet(
         currentThemeColor = MainColor,
-        onDismissRequest = {}
+        onDismissRequest = {},
+        onSchedule = {},
+        onAddTime = {}
     )
 }
