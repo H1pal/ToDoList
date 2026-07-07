@@ -1,5 +1,6 @@
 package com.example.todolist.ui.components.items
 
+import android.graphics.Paint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

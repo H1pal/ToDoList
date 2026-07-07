@@ -80,7 +80,6 @@ fun HomeModalsContent(
 
     Row(
         modifier = Modifier
-            .fillMaxSize()
             .padding(bottom = 22.dp)
             .clickable {
                 isTodoOpen = true

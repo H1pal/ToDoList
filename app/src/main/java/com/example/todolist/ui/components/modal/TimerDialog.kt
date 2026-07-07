@@ -1,5 +1,6 @@
 package com.example.todolist.ui.components.modal
 
+import android.R.attr.text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -197,8 +199,7 @@ fun TimerDialog(
                         )
 
                         clockHours.forEach { (h, modifier) ->
-                            Text(
-                                text = "$h",
+                            Box(
                                 modifier = modifier
                                     .size(42.dp)
                                     .background(
@@ -208,11 +209,19 @@ fun TimerDialog(
                                     .clickable {
                                         hour = h.toLong()
                                     },
-                                color = Color.Black,
-                                fontSize = 20.sp,
-                                textAlign = TextAlign.Center,
-                                lineHeight = 16.sp
-                            )
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = "$h",
+                                    modifier = Modifier
+                                        .align(Alignment.Center),
+                                    color = if (hour.toInt() == h) Color.White else Color.Black,
+                                    fontSize = 20.sp,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+
+
                         }
                     }
                 }
