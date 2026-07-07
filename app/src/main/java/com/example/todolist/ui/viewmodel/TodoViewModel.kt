@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import java.sql.Time
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -40,6 +39,7 @@ class TodoViewModel @Inject constructor(
             val outcomeList = taskList.value + currentTodoTask
             todoRepository.setTasks(outcomeList)
             currentTodoTask = null
+            println("저장")
         }
     }
 }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -27,28 +28,51 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.todolist.ui.components.modal.CalendarModalSheet
+import com.example.todolist.ui.components.modal.TimerDialog
 import com.example.todolist.ui.components.modal.TodoModalSheet
 import com.example.todolist.ui.theme.MainColor
+import com.example.todolist.ui.viewmodel.TodoViewModel
+import java.time.LocalDate
 
-enum class FocusedField {
-    TITLE, DESCRIPTION, NONE
+@Composable
+fun HomeModalsScreen(
+    modifier: Modifier = Modifier,
+    currentThemeColor: Color,
+    todoViewModel: TodoViewModel = hiltViewModel()
+) {
+    HomeModalsContent(
+        currentThemeColor = currentThemeColor,
+        onCompleteInfo = { title, description ->
+            todoViewModel.setTodoInfo(title = title, description = description)
+        },
+        onCompleteTime = { time ->
+            todoViewModel.setTodoTime(time = time)
+        },
+        onSchedule = { date ->
+            todoViewModel.setSchedule(date = date)
+        }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskCreateScreen(
-    modifier: Modifier,
-    currentThemeColor: Color
+fun HomeModalsContent(
+    modifier: Modifier = Modifier,
+    currentThemeColor: Color,
+    onCompleteInfo: (String, String) -> Unit,
+    onCompleteTime: (String) -> Unit,
+    onSchedule: (LocalDate) -> Unit
 ) {
-    var savedTitle: String
-    var savedDescription: String
-
-
     var currentFocusedField by remember { mutableStateOf(FocusedField.NONE) }
 
     var title by remember { mutableStateOf(TextFieldValue("")) }
     var description by remember { mutableStateOf(TextFieldValue("")) }
+    var hour: String
+    var minute: String
+    var noon: String
+    var time by remember { mutableStateOf("") }
 
     var isTodoOpen by remember { mutableStateOf(false) }
     var isCalendarOpen by remember { mutableStateOf(false) }
@@ -56,6 +80,7 @@ fun TaskCreateScreen(
 
     Row(
         modifier = Modifier
+            .fillMaxSize()
             .padding(bottom = 22.dp)
             .clickable {
                 isTodoOpen = true
@@ -102,8 +127,8 @@ fun TaskCreateScreen(
             currentFocusedField = currentFocusedField,
             onUpload = {
                 isTodoOpen = false
-                title = TextFieldValue("")
-                description = TextFieldValue("")
+                isCalendarOpen = true
+                onCompleteInfo(title.toString(), description.toString())
             },
             onTitleChange = { text ->
                 title = text
@@ -122,23 +147,54 @@ fun TaskCreateScreen(
 
     if (isCalendarOpen) {
         CalendarModalSheet(
+            currentThemeColor = currentThemeColor,
             onDismissRequest = {
                 isCalendarOpen = false
             },
-            currentThemeColor = currentThemeColor
+            onAddTime = {
+                isTimerOpen = true
+            },
+            onSchedule = { date ->
+                title = TextFieldValue("")
+                description = TextFieldValue("")
+                onSchedule(date)
+                isCalendarOpen = false
+            }
         )
     }
 
     if (isTimerOpen) {
-
+        TimerDialog(
+            currentThemeColor = currentThemeColor,
+            onDismissRequest = {
+                isTimerOpen = false
+            },
+            onConfirm = { h, m, isAm ->
+                hour = h
+                minute = m
+                noon = if (isAm) "AM" else "PM"
+                time = "${hour}:${minute} $noon"
+                isTimerOpen = false
+                onCompleteTime(time)
+            }
+        )
     }
+}
+
+enum class FocusedField {
+    TITLE, DESCRIPTION, NONE
 }
 
 @Preview
 @Composable
-fun PreviewTaskCreateScreen() {
-    TaskCreateScreen(
+fun PreviewHomeModalsContent() {
+    HomeModalsContent(
         modifier = Modifier,
-        currentThemeColor = MainColor
+        currentThemeColor = MainColor,
+        onCompleteInfo = { t, d ->
+
+        },
+        onCompleteTime = {},
+        onSchedule = {}
     )
 }

@@ -21,6 +21,10 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,7 +38,9 @@ import com.example.todolist.ui.components.button.ModalActionButton
 import com.example.todolist.ui.components.items.CalendarItems
 import com.example.todolist.ui.theme.AlterColor
 import com.example.todolist.ui.theme.MainColor
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.YearMonth
 import java.time.temporal.ChronoField
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,13 +49,16 @@ fun CalendarModalSheet(
     modifier: Modifier = Modifier,
     onDismissRequest: () -> Unit,
     onAddTime: () -> Unit,
-    onSchedule: () -> Unit,
+    onSchedule: (LocalDate) -> Unit,
     currentThemeColor: Color
 ) {
     val sheetState = rememberModalBottomSheetState()
 
     val currentTime = LocalDateTime.now()
     val nextWeek = currentTime.plusWeeks(1)
+
+    var currentMonth by remember { mutableStateOf(YearMonth.of(currentTime.year, currentTime.month)) }
+    var selectedDate by remember { mutableStateOf(LocalDate.of(currentTime.year, currentTime.month, currentTime.dayOfMonth)) }
 
     ModalBottomSheet(
         onDismissRequest = {
@@ -143,8 +152,18 @@ fun CalendarModalSheet(
             ) {
                 CalendarItems(
                     modifier = Modifier,
-                    currentTime = currentTime,
-                    currentThemeColor = currentThemeColor
+                    currentMonth = currentMonth,
+                    selectedDate = selectedDate,
+                    onPlus = {
+                        currentMonth = currentMonth.plusMonths(1)
+                    },
+                    onMinus = {
+                        currentMonth = currentMonth.minusMonths(1)
+                    },
+                    currentThemeColor = currentThemeColor,
+                    onSelectDate = { date ->
+                        selectedDate = date
+                    }
                 )
             }
 
@@ -165,7 +184,9 @@ fun CalendarModalSheet(
                     modifier = Modifier,
                     imageVector = Icons.Default.Timer,
                     text = "Reschedule",
-                    onClicked = onSchedule,
+                    onClicked = {
+                        onSchedule(selectedDate)
+                    },
                     backgroundColor = currentThemeColor
                 )
             }

@@ -26,6 +26,7 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.toString
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -51,7 +52,7 @@ fun TimerDialog(
     modifier: Modifier = Modifier,
     onDismissRequest: () -> Unit,
     currentThemeColor: Color,
-    onConfirm: (hour: Int, minute: Int, isAm: Boolean) -> Unit
+    onConfirm: (hour: String, minute: String, isAm: Boolean) -> Unit
 ) {
     val currentTime = LocalDateTime.now()
 
@@ -268,8 +269,8 @@ fun TimerDialog(
                     TextButton(
                         onClick = {
                             onConfirm(
-                                hour.toInt(),
-                                minute.toInt(),
+                                hour.toString().padStart(2, '0'),
+                                minute.toString().padStart(2, '0'),
                                 isAm
                             )
                         }

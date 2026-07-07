@@ -22,10 +22,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,17 +34,19 @@ import androidx.compose.ui.unit.sp
 import com.example.todolist.ui.theme.Ghost
 import com.example.todolist.ui.theme.MainColor
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.YearMonth
 
 @Composable
 fun CalendarItems(
     modifier: Modifier,
-    currentTime: LocalDateTime,
-    currentThemeColor: Color
+    currentThemeColor: Color,
+    currentMonth: YearMonth,
+    selectedDate: LocalDate,
+    onPlus: () -> Unit,
+    onMinus: () -> Unit,
+    onSelectDate : (LocalDate) -> Unit
 ) {
-    var currentMonth by remember { mutableStateOf(YearMonth.of(currentTime.year, currentTime.month)) }
-    var selectedDate by remember { mutableStateOf(LocalDate.of(currentTime.year, currentTime.month, currentTime.dayOfMonth)) }
+
 
     val days = getCalendarDays(currentMonth)
 
@@ -59,7 +57,8 @@ fun CalendarItems(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = { currentMonth = currentMonth.minusMonths(1) }
+            IconButton(
+                onClick = onMinus
             ) {
                 Icon(
                     Icons.Default.KeyboardArrowLeft,
@@ -81,7 +80,7 @@ fun CalendarItems(
                 )
             }
 
-            IconButton(onClick = { currentMonth = currentMonth.plusMonths(1) }) {
+            IconButton(onClick = onPlus) {
                 Icon(
                     Icons.Default.KeyboardArrowRight,
                     contentDescription = null,
@@ -97,7 +96,7 @@ fun CalendarItems(
         ) {
             daysOfWeek.forEach { day ->
                 Text(
-                    day,
+                    text = day,
                     modifier = Modifier.weight(1f),
                     textAlign = TextAlign.Center,
                     color = Color.DarkGray,
@@ -121,7 +120,7 @@ fun CalendarItems(
                         .padding(4.dp)
                         .clip(RoundedCornerShape(8.dp))
                         .background(if (isSelected) currentThemeColor else Color.Transparent)
-                        .clickable { selectedDate = date },
+                        .clickable { onSelectDate(date) },
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -158,9 +157,17 @@ fun getCalendarDays(yearMonth: YearMonth): List<LocalDate> {
 @Preview
 @Composable
 fun PreviewCalendarItems() {
+    val currentTime = LocalDate.now()
+
     CalendarItems(
         modifier = Modifier,
-        currentTime = LocalDateTime.now(),
-        currentThemeColor = MainColor
+        currentThemeColor = MainColor,
+        onPlus = {},
+        onMinus = {},
+        onSelectDate = { d ->
+
+        },
+        currentMonth = YearMonth.of(currentTime.year, currentTime.month),
+        selectedDate = LocalDate.now()
     )
 }

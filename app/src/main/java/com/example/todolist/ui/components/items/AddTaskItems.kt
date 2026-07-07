@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.todolist.feature.home.TaskCreateScreen
+import com.example.todolist.feature.home.HomeModalsScreen
 import com.example.todolist.ui.components.TodoDivider
 import com.example.todolist.ui.theme.AlterColor
 import com.example.todolist.ui.theme.MainColor
@@ -35,7 +35,7 @@ fun AddTaskItems(
                 .padding(16.dp)
                 .align(alignment = Alignment.BottomCenter)
         ) {
-            TaskCreateScreen(
+            HomeModalsScreen(
                 modifier = Modifier,
                 currentThemeColor = currentThemeColor
             )

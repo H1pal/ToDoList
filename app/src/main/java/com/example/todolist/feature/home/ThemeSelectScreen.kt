@@ -42,6 +42,7 @@ import com.example.todolist.ui.theme.SecondColor
 import com.example.todolist.ui.theme.ThirdColor
 import com.example.todolist.ui.theme.ToDoListTheme
 import com.example.todolist.ui.viewmodel.ThemeViewModel
+import com.example.todolist.ui.viewmodel.TodoViewModel
 import com.example.todolist.util.route.Choice
 import com.example.todolist.util.route.Home
 
@@ -93,7 +94,6 @@ fun ThemeContent(
                 .padding(innerPadding)
         ) {
 
-
             MenuTitleText(
                 modifier = Modifier
                     .padding(top = 40.dp)
@@ -101,7 +101,6 @@ fun ThemeContent(
                 title = "Create to do list",
                 subTitle = "Choose your to do list color theme:"
             )
-
 
 
             Column(
@@ -164,7 +163,6 @@ fun ThemeContent(
                     fontSize = 18.sp
                 )
             }
-
 
         }
 

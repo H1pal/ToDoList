@@ -29,7 +29,6 @@ import com.example.todolist.ui.theme.MainColor
 import com.example.todolist.ui.theme.ToDoListTheme
 import com.example.todolist.ui.viewmodel.ThemeViewModel
 
-
 @Composable
 fun HomeScreen(
     themeViewModel: ThemeViewModel = hiltViewModel(),
