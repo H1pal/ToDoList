@@ -11,6 +11,7 @@ import com.example.todolist.ui.components.ThemeBox
 
 @Composable
 fun TaskBox(
+    modifier: Modifier = Modifier,
     color: Color,
     content: @Composable BoxScope.() -> Unit
 ) {

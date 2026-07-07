@@ -16,7 +16,8 @@ import javax.inject.Inject
 class TodoViewModel @Inject constructor(
     private val todoRepository: TodoRepository
 ) : ViewModel() {
-    val taskList: StateFlow<List<TodoTask>> = todoRepository.todoTasks.stateIn(
+    val todoList: StateFlow<List<TodoTask>> = todoRepository.todoTasks
+        .stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
         initialValue = emptyList()
@@ -36,7 +37,7 @@ class TodoViewModel @Inject constructor(
         currentTodoTask = currentTodoTask?.copy(date = date) ?: return
 
         viewModelScope.launch {
-            val outcomeList = taskList.value + currentTodoTask
+            val outcomeList = todoList.value + currentTodoTask
             todoRepository.setTasks(outcomeList)
             currentTodoTask = null
             println("저장")
