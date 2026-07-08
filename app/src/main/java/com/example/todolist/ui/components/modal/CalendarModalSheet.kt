@@ -57,8 +57,8 @@ fun CalendarModalSheet(
     val currentTime = LocalDateTime.now()
     val nextWeek = currentTime.plusWeeks(1)
 
-    var currentMonth by remember { mutableStateOf(YearMonth.of(currentTime.year, currentTime.month)) }
-    var selectedDate by remember { mutableStateOf(LocalDate.of(currentTime.year, currentTime.month, currentTime.dayOfMonth)) }
+    var currentMonth by remember { mutableStateOf(YearMonth.of(currentTime.year, currentTime.monthValue)) }
+    var selectedDate by remember { mutableStateOf(LocalDate.of(currentTime.year, currentTime.month + 1, currentTime.dayOfMonth)) }
 
     ModalBottomSheet(
         onDismissRequest = {

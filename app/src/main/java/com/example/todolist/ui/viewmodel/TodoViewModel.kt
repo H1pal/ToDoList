@@ -2,6 +2,7 @@ package com.example.todolist.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.todolist.data.model.TodoTask
 import com.example.todolist.data.repository.TodoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,6 +42,14 @@ class TodoViewModel @Inject constructor(
             todoRepository.setTasks(outcomeList)
             currentTodoTask = null
             println("저장")
+        }
+    }
+
+    fun clearTask() {
+        viewModelScope.launch {
+            todoRepository.clearTask()
+            currentTodoTask = null
+            println("삭제")
         }
     }
 }

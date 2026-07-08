@@ -42,7 +42,6 @@ import com.example.todolist.ui.theme.SecondColor
 import com.example.todolist.ui.theme.ThirdColor
 import com.example.todolist.ui.theme.ToDoListTheme
 import com.example.todolist.ui.viewmodel.ThemeViewModel
-import com.example.todolist.ui.viewmodel.TodoViewModel
 import com.example.todolist.util.route.Choice
 import com.example.todolist.util.route.Home
 

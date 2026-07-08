@@ -34,7 +34,8 @@ fun ThemeBox(
     Box(
         modifier = modifier
             .size(width = 327.dp, height = height)
-            .shadow(8.dp,
+            .shadow(
+                elevation = 8.dp,
                 shape = RoundedCornerShape(10.dp)
             )
     ) {
@@ -46,7 +47,6 @@ fun ThemeBox(
                 )
                 .background(Color.White)
         ) {
-
             Box(
                 modifier = Modifier
                     .fillMaxWidth()

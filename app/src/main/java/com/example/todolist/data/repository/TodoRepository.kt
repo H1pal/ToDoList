@@ -5,18 +5,33 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import com.example.todolist.data.model.TodoTask
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonPrimitive
+import com.google.gson.JsonSerializer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.time.LocalDate
 import javax.inject.Inject
-import kotlin.collections.map
-import kotlin.collections.sortedBy
-import kotlin.jvm.java
 
 class TodoRepository @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) {
-    private val gson = Gson()
+    private val gson = GsonBuilder()
+        .registerTypeAdapter(
+            LocalDate::class.java,
+            JsonDeserializer { json, _, _ ->
+                LocalDate.parse(json.asString)
+            }
+        )
+        .registerTypeAdapter(
+            LocalDate::class.java,
+            JsonSerializer { src: LocalDate, _, _ ->
+                JsonPrimitive(src.toString())
+            }
+        )
+        .create()
+
     companion object {
         private val TODOLIST_KEY = stringSetPreferencesKey("todo_list")
     }
@@ -26,7 +41,10 @@ class TodoRepository @Inject constructor(
 
         serializedSet
             .map { jsonString ->
-                gson.fromJson(jsonString, TodoTask::class.java)
+                gson.fromJson(
+                    jsonString,
+                    TodoTask::class.java
+                )
             }.sortedBy { it.id }
     }
 
@@ -36,5 +54,9 @@ class TodoRepository @Inject constructor(
         }.toSet()
 
         dataStore.edit { it[TODOLIST_KEY] = serializedSet }
+    }
+
+    suspend fun clearTask() {
+        dataStore.edit { it.clear() }
     }
 }
