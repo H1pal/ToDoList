@@ -1,11 +1,13 @@
 package com.example.todolist.feature.home
 
+import android.R.attr.description
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,7 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Cancel
+import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -21,17 +23,20 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.key.Key.Companion.W
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -62,7 +67,10 @@ fun HomeScreen(
         currentThemeColor = currentThemeColor,
         navController = navController,
         todoList = todoList,
-        onClearAll = { todoViewModel.clearTask() }
+        onClearAll = { todoViewModel.clearTask() },
+        onDeleteTask = { task ->
+            todoViewModel.deleteTask(task = task)
+        }
     )
 }
 
@@ -71,9 +79,11 @@ fun HomeContent(
     currentThemeColor: Color,
     navController: NavController,
     todoList: List<TodoTask>,
-    onClearAll: () -> Unit
+    onClearAll: () -> Unit,
+    onDeleteTask: (TodoTask) -> Unit
 ) {
     var isOpenDesc by remember { mutableStateOf(false) }
+    var selectedId by remember { mutableLongStateOf(todoList.getOrNull(0)?.id ?: 0) }
 
     Scaffold(
         modifier = Modifier
@@ -92,7 +102,7 @@ fun HomeContent(
                     )
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Cancel,
+                        imageVector = Icons.Default.DeleteForever,
                         contentDescription = "모든 할 일 삭제",
                         tint = Color.White,
                         modifier = Modifier
@@ -153,6 +163,11 @@ fun HomeContent(
                         )
                     }
                 }
+
+                Spacer(
+                    modifier = Modifier
+                        .padding(vertical = 20.dp)
+                )
             }
 
             items(
@@ -180,11 +195,14 @@ fun HomeContent(
                                     .align(alignment = Alignment.BottomCenter)
                                     .clickable {
                                         isOpenDesc = true
+                                        selectedId = task.id
                                     }
                             ) {
                                 Text(
                                     text = task.title,
-                                    color = Color.Black
+                                    color = Color.Black,
+                                    fontSize = 24.sp,
+                                    fontWeight = FontWeight.W600
                                 )
 
                                 TodoDivider(
@@ -222,20 +240,26 @@ fun HomeContent(
 
                         }
 
-
-
                     }
                 }
-                if (isOpenDesc) {
+
+
+                if (isOpenDesc && selectedId == task.id) {
                     DescriptionDialog(
                         currentThemeColor = currentThemeColor,
                         title = task.title,
                         description = task.description,
                         onDismissRequest = {
                             isOpenDesc = false
+                        },
+                        onDeleteTask = {
+                            onDeleteTask(task)
                         }
                     )
                 }
+
+
+
             }
         }
 
@@ -250,7 +274,10 @@ private fun PreviewHomeScreen() {
             currentThemeColor = MainColor,
             navController = rememberNavController(),
             todoList = emptyList(),
-            onClearAll = {}
+            onClearAll = {},
+            onDeleteTask = { task ->
+
+            }
         )
     }
 }

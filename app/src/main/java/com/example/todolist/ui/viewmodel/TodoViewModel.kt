@@ -41,7 +41,7 @@ class TodoViewModel @Inject constructor(
             val outcomeList = todoList.value + currentTodoTask
             todoRepository.setTasks(outcomeList)
             currentTodoTask = null
-            println("저장")
+            println("complete to save")
         }
     }
 
@@ -49,7 +49,15 @@ class TodoViewModel @Inject constructor(
         viewModelScope.launch {
             todoRepository.clearTask()
             currentTodoTask = null
-            println("삭제")
+            println("complete to clear")
+        }
+    }
+
+    fun deleteTask(task: TodoTask) {
+        viewModelScope.launch {
+            val tasks = todoList.value.filter { it.id != task.id }
+            todoRepository.setTasks(tasks)
+            println("complete to delete")
         }
     }
 }
