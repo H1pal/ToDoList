@@ -83,7 +83,7 @@ fun ThemeContent(
             TopBar(
                 titleText = "Choose Theme",
                 color = currentTheme
-            )
+            ) {}
         }
     ) { innerPadding ->
 
