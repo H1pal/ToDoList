@@ -57,6 +57,6 @@ class TodoRepository @Inject constructor(
     }
 
     suspend fun clearTask() {
-        dataStore.edit { it.clear() }
+        dataStore.edit { it[TODOLIST_KEY] = emptySet() }
     }
 }
