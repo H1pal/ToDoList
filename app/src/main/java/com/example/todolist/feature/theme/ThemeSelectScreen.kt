@@ -1,4 +1,4 @@
-package com.example.todolist.feature.home
+package com.example.todolist.feature.theme
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,13 +28,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.todolist.ui.components.TopBar
+import com.example.todolist.ui.components.button.ActionButton
 import com.example.todolist.ui.components.button.ColorThemeButton
-import com.example.todolist.ui.components.button.TodoButton
-import com.example.todolist.ui.components.text.MenuTitle
+import com.example.todolist.ui.components.textfield.MenuTitleText
 import com.example.todolist.ui.theme.FourthColor
 import com.example.todolist.ui.theme.MainColor
 import com.example.todolist.ui.theme.SecondColor
@@ -79,8 +81,9 @@ fun ThemeContent(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopBar(
-                titleText = "Choose Theme"
-            )
+                titleText = "Choose Theme",
+                color = currentTheme
+            ) {}
         }
     ) { innerPadding ->
 
@@ -90,15 +93,13 @@ fun ThemeContent(
                 .padding(innerPadding)
         ) {
 
-
-            MenuTitle(
+            MenuTitleText(
                 modifier = Modifier
                     .padding(top = 40.dp)
                     .align(alignment = Alignment.TopCenter),
                 title = "Create to do list",
                 subTitle = "Choose your to do list color theme:"
             )
-
 
 
             Column(
@@ -145,16 +146,23 @@ fun ThemeContent(
                 )
             }
 
-            TodoButton(
+            ActionButton(
                 modifier = Modifier
                     .padding(bottom = 47.dp)
                     .align(alignment = Alignment.BottomCenter),
-                text = "Open Todyapp",
                 width = 327.dp,
                 onClicked = {
                     choiceStart()
-                }
-            )
+                },
+                backgroundColor = currentTheme
+            ) {
+                Text(
+                    modifier = Modifier,
+                    text = "Open Todyapp",
+                    fontSize = 18.sp
+                )
+            }
+
         }
 
         Icon(

@@ -18,3 +18,5 @@ val FourthColor = Color(0xFF1877F2)
 val AlterColor = Color(0xFF767E8C)
 
 val LightGray = Color(0xFFE7ECF5)
+
+val Ghost = Color(0xFFA9B0C5)

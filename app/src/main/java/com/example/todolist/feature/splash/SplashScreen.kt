@@ -1,4 +1,4 @@
-package com.example.todolist.feature
+package com.example.todolist.feature.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.todolist.R
-import com.example.todolist.ui.components.text.BasicText
+import com.example.todolist.ui.components.textfield.TitleText
 import com.example.todolist.ui.theme.MainColor
 import com.example.todolist.ui.theme.ToDoListTheme
 import com.example.todolist.util.route.Choice
@@ -31,7 +31,6 @@ import kotlin.time.Duration.Companion.milliseconds
 @Composable
 fun SplashScreen(
     navController: NavController
-    // = rememberNavController()
 ) {
     Scaffold(
         modifier = Modifier
@@ -64,7 +63,10 @@ fun SplashScreen(
                     contentDescription = "ToDoList"
                 )
 
-                BasicText()
+                TitleText(
+                    modifier = Modifier,
+                    space = 12.dp
+                )
 
                 Spacer(modifier = Modifier.height(92.dp))
             }

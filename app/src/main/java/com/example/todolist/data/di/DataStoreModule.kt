@@ -2,8 +2,9 @@ package com.example.todolist.data.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import com.example.todolist.data.local.themeDataStore
+import androidx.datastore.preferences.preferencesDataStoreFile
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,16 +15,11 @@ import jakarta.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataStoreModule {
-
     @Provides
     @Singleton
     fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
-        return context.themeDataStore
+        return PreferenceDataStoreFactory.create(
+            produceFile = { context.preferencesDataStoreFile("app_preference") }
+        )
     }
-
-//    @Provides
-//    @Singleton
-//    fun provideTodoDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
-//        return context.todoDataStore
-//    }
 }
