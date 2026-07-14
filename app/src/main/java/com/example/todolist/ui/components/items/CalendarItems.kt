@@ -46,8 +46,6 @@ fun CalendarItems(
     onMinus: () -> Unit,
     onSelectDate : (LocalDate) -> Unit
 ) {
-
-
     val days = getCalendarDays(currentMonth)
 
     Column {
@@ -107,7 +105,7 @@ fun CalendarItems(
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(7),
-            modifier = Modifier.height(340.dp),
+            modifier = Modifier.height(300.dp),
             userScrollEnabled = true
         ) {
             items(days) { date ->

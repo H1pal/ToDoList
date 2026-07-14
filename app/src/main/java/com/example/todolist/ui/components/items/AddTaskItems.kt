@@ -1,6 +1,5 @@
 package com.example.todolist.ui.components.items
 
-import android.graphics.Paint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,7 +16,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.todolist.feature.home.HomeModalsScreen
 import com.example.todolist.ui.components.TodoDivider
 import com.example.todolist.ui.theme.AlterColor
 import com.example.todolist.ui.theme.MainColor
@@ -36,7 +34,7 @@ fun AddTaskItems(
                 .padding(16.dp)
                 .align(alignment = Alignment.BottomCenter)
         ) {
-            HomeModalsScreen(
+            HomeModalsItems(
                 modifier = Modifier,
                 currentThemeColor = currentThemeColor
             )

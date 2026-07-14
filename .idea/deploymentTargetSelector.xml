@@ -18,23 +18,23 @@
         <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="PreviewTimerDialog">
-        <option name="selectionMode" value="DROPDOWN" />
-        <DialogSelection />
-      </SelectionState>
       <SelectionState runConfigName="MainActivity">
         <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="PreviewCalendarModalSheet">
+      <SelectionState runConfigName="PreviewTimePickerDialogItems">
         <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="PreviewAddTaskItems">
+      <SelectionState runConfigName="PreviewCalendarItems">
         <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="PreviewHomeModalsContent">
+      <SelectionState runConfigName="PreviewTimePickerDialogItems (1)">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DialogSelection />
+      </SelectionState>
+      <SelectionState runConfigName="PreviewTimerDialog">
         <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
       </SelectionState>

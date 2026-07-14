@@ -1,4 +1,4 @@
-package com.example.todolist.feature
+package com.example.todolist.feature.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

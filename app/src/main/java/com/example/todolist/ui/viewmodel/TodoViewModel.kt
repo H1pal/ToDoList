@@ -2,7 +2,6 @@ package com.example.todolist.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.todolist.data.model.TodoTask
 import com.example.todolist.data.repository.TodoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

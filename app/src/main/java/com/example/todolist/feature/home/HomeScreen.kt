@@ -273,7 +273,7 @@ private fun PreviewHomeScreen() {
             navController = rememberNavController(),
             todoList = emptyList(),
             onClearAll = {},
-            onDeleteTask = { task ->
+            onDeleteTask = { _ ->
 
             }
         )

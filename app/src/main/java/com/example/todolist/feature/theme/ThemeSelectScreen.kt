@@ -1,4 +1,4 @@
-package com.example.todolist.feature.home
+package com.example.todolist.feature.theme
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

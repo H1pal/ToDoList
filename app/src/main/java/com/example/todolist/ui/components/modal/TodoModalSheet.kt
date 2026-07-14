@@ -30,7 +30,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.todolist.feature.home.FocusedField
+import com.example.todolist.ui.components.items.FocusedField
 import com.example.todolist.ui.components.TodoDivider
 import com.example.todolist.ui.components.textfield.TodoTextField
 import com.example.todolist.ui.theme.Ghost

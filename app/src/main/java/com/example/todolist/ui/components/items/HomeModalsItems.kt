@@ -1,4 +1,4 @@
-package com.example.todolist.feature.home
+package com.example.todolist.ui.components.items
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -36,7 +36,7 @@ import com.example.todolist.ui.viewmodel.TodoViewModel
 import java.time.LocalDate
 
 @Composable
-fun HomeModalsScreen(
+fun HomeModalsItems(
     modifier: Modifier = Modifier,
     currentThemeColor: Color,
     todoViewModel: TodoViewModel = hiltViewModel()
