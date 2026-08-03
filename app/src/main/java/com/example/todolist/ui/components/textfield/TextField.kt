@@ -17,13 +17,14 @@ fun TodoTextField(
     value: TextFieldValue,
     hint: String,
     onValueChange: (TextFieldValue) -> Unit,
-    cursorColor: Color
+    cursorColor: Color,
 ) {
     TextField(
         value = value,
         onValueChange = onValueChange,
         placeholder = {
-            Text(text = hint,
+            Text(
+                text = hint,
                 color = Ghost
             )
         },

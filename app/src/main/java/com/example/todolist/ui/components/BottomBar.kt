@@ -17,7 +17,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoveToInbox
 import androidx.compose.material.icons.filled.Pages
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -40,7 +40,7 @@ fun BottomBar(
     var selectedNavigator by remember { mutableStateOf(BottomBarNavigator.Home) }
 
     BottomAppBar(
-        modifier = Modifier
+        modifier = modifier
             .shadow(10.dp),
         containerColor = Color.White
     ) {
@@ -69,7 +69,7 @@ fun BottomBar(
                     Column(
                         modifier = Modifier
                     ) {
-                        Divider(
+                        HorizontalDivider(
                             modifier = Modifier
                                 .padding(bottom = 10.dp),
                             thickness = 3.dp,

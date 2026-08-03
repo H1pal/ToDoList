@@ -45,7 +45,9 @@ class TodoRepository @Inject constructor(
                     jsonString,
                     TodoTask::class.java
                 )
-            }.sortedBy { it.id }
+            }
+            .filterNotNull()
+            .sortedBy { it.id }
     }
 
     suspend fun setTasks(tasks: List<TodoTask?>) {

@@ -3,7 +3,7 @@ package com.example.todolist.ui.components.items
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TimePicker
-import androidx.compose.material3.TimePickerColors
+import androidx.compose.material3.TimePickerDefaults
 import androidx.compose.material3.TimePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
@@ -25,7 +25,7 @@ fun TimePickerItems(
     Column {
         TimePicker(
             state = state,
-            colors = TimePickerColors(
+            colors = TimePickerDefaults.colors(
                 clockDialColor = LightGray,
                 selectorColor = currentThemeColor,
                 containerColor = currentThemeColor,
